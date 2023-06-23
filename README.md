@@ -1,1 +1,1 @@
-# Geeks-for-Geeks-POTD
+# Geeks-for-Geeks-POTD-Java
