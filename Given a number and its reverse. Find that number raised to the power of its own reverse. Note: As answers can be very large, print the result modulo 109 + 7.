@@ -1,0 +1,31 @@
+Given a number and its reverse. Find that number raised to the power of its own reverse.
+Note: As answers can be very large, print the result modulo 109 + 7.
+
+=============================================================================================================
+
+class Solution
+{
+        
+    long power(int N,int R)
+    {
+        //Your code here
+        if (R == 1) {
+            return N;
+        }
+
+        // Calculate the power of N raised to R/2 recursively.
+        long temp = power(N, R / 2) % 1000000007;
+
+        // Calculate the final result by squaring the temporary result and applying modulo.
+        long res = (temp * temp) % 1000000007;
+
+        // If R is even, return the result.
+        if (R % 2 == 0) {
+            return res;
+        } else {
+            // If R is odd, multiply the result by N and apply modulo.
+            return (res * N) % 1000000007;
+        }
+    }
+
+}
