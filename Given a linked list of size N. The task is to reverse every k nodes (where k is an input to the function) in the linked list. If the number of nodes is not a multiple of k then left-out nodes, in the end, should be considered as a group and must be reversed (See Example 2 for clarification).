@@ -1,0 +1,66 @@
+
+Given a linked list of size N. The task is to reverse every k nodes (where k is an input to the function) 
+in the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should 
+be considered as a group and must be reversed (See Example 2 for clarification).
+
+
+
+
+======================================================================================================
+class Solution
+{
+    public static Node reverse(Node node, int k)
+    {
+        //Your code here
+        Node head=null;
+        Node prev=null;
+        Node temp;
+        Node y=null;
+        Node x=node;
+        while(x!=null)
+        {
+            temp=x;
+            for(int i=0;i<k;i++)
+            {
+                prev=x;
+                x=x.next;
+                if(x==null)
+                    break;
+            }
+            prev.next=null;
+            if(head==null)
+            {
+                head=rev(temp);
+                y=head;
+                while(y.next!=null)
+                {
+                    y=y.next;
+                }
+            }
+            else
+            {
+                y.next=rev(temp);
+                while(y.next!=null)
+                {
+                    y=y.next;
+                }
+            }
+        }
+        return head;
+    }
+    
+    public static Node rev(Node head)
+    {
+        Node cur=head;
+        Node prev=null;
+        Node temp;
+        while(cur!=null)
+        {
+            temp=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=temp;
+        }
+        return prev;
+    }
+}
