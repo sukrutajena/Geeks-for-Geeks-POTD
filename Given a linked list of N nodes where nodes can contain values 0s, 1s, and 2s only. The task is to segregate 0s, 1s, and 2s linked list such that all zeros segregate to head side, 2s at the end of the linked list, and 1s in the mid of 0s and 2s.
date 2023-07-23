@@ -1,0 +1,51 @@
+Given a linked list of N nodes where nodes can contain values 0s, 1s, and 2s only. 
+The task is to segregate 0s, 1s, and 2s linked list such that all zeros segregate to 
+head side, 2s at the end of the linked list, and 1s in the mid of 0s and 2s.
+
+
+
+
+=============================================================================================
+class Solution
+{
+    //Function to sort a linked list of 0s, 1s and 2s.
+    static Node segregate(Node head)
+    {
+       
+        
+        Node temp=head;
+        int zcount=0;
+        int ocount=0;
+        int tcount=0;
+        while(temp!=null){
+            if(temp.data==0){
+                zcount++;
+            }
+            else if(temp.data==1){
+                ocount++;
+            }else{
+                tcount++;
+            }
+            temp=temp.next;
+        }
+         Node ans=head;
+        while(ans!=null){
+        while(zcount!=0){
+            ans.data=0;
+            ans=ans.next;
+            zcount--;
+        }
+        while(ocount!=0){
+            ans.data=1;
+            ans=ans.next;
+            ocount--;
+        }
+        while(tcount!=0){
+            ans.data=2;
+            ans=ans.next;
+            tcount--;
+        }
+        }
+        return head;
+    }
+}
