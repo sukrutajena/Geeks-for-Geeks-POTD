@@ -1,0 +1,29 @@
+Given a binary tree of size  N, a node, and a positive integer k., Your task is to complete
+the function kthAncestor(), the function should return the kth ancestor of the given node in 
+the binary tree. If there does not exist any such ancestor then return -1.
+Note: It is guaranteed that the node exists in the tree.
+
+====================================================================================================
+
+class Solution {
+   
+    public void getAncestors(Node root, Map<Integer, Integer> map, Node parent) {
+        if (root == null) return;
+        map.put(root.data, parent != null ? parent.data : -1);
+        getAncestors(root.left, map, root);
+        getAncestors(root.right, map, root);
+    }
+
+    public int kthAncestor(Node root, int k, int node) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        getAncestors(root, map, null);
+
+        int ancestor = node;
+        while (k > 0 && ancestor != -1) {
+            ancestor = map.get(ancestor);
+            k--;
+        }
+
+        return ancestor;
+    }
+}
