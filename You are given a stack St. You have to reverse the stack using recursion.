@@ -1,0 +1,20 @@
+You are given a stack St. You have to reverse the stack using recursion.
+
+==================================================================================================================
+
+class Solution
+{ 
+    static void reverse(Stack<Integer> s)
+    {
+        // add your code here
+        Queue<Integer> q = new LinkedList<>();
+        while(!s.isEmpty())
+        {
+            q.add(s.pop());
+        }
+        while(!q.isEmpty())
+        {
+            s.push(q.remove());
+        }
+    }
+}
