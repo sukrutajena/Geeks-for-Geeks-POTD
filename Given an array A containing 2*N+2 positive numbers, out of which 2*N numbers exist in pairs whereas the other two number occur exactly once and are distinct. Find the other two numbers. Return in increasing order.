@@ -1,0 +1,30 @@
+Given an array A containing 2*N+2 positive numbers, out of which 2*N numbers 
+exist in pairs whereas the other two number occur exactly once and are distinct.
+Find the other two numbers. Return in increasing order.
+
+=====================================================================================================
+
+
+
+class Solution
+{
+    public int[] singleNumber(int[] nums)
+    {
+        // Code here
+        int n=nums.length;
+        int[] sol=new int[2];
+        Map<Integer,Integer> hm=new HashMap<>();
+        for(int i:nums){
+            hm.put(i,hm.getOrDefault(i,0)+1);
+        }
+        int count=0;
+        for(int i:hm.keySet()){
+            if(hm.get(i)==1){
+                sol[count]=i;
+                count++;
+            }
+        }
+        Arrays.sort(sol);
+        return sol;
+    }
+}
