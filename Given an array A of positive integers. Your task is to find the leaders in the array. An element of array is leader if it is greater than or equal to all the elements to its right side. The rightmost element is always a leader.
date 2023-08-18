@@ -1,0 +1,32 @@
+Given an array A of positive integers. Your task is to find the leaders in the array. An element of array is leader
+if it is greater than or equal to all the elements to its right side. The rightmost element is always a leader. 
+
+=================================================================================================================
+
+
+
+class Solution{
+    //Function to find the leaders in the array.
+    static ArrayList<Integer> leaders(int arr[], int n){
+        // Your code here
+        ArrayList<Integer> result = new ArrayList<>();
+        int maxRight = arr[n - 1]; // The rightmost element is always a leader
+        result.add(maxRight);
+
+        // Traverse the array from right to left
+        for (int i = n - 2; i >= 0; i--) {
+            if (arr[i] >= maxRight) {
+                maxRight = arr[i];
+                result.add(maxRight);
+            }
+        }
+
+        // Reverse the result list to maintain the original order
+        ArrayList<Integer> reversedResult = new ArrayList<>();
+        for (int i = result.size() - 1; i >= 0; i--) {
+            reversedResult.add(result.get(i));
+        }
+
+        return reversedResult;
+    }
+}
