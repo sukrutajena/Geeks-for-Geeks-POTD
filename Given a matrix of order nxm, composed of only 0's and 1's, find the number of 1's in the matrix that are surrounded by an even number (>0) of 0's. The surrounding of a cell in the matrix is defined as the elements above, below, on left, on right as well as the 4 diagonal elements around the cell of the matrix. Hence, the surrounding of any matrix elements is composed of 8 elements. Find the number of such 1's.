@@ -1,0 +1,35 @@
+Given a matrix of order nxm, composed of only 0's and 1's, find the number of 1's in the matrix that are surrounded by
+an even number (>0) of 0's. The surrounding of a cell in the matrix is defined as the elements above, below, on left, on 
+right as well as the 4 diagonal elements around the cell of the matrix. Hence, the surrounding of any matrix elements is
+composed of 8 elements. Find the number of such 1's.
+
+
+==================================================================================================
+
+class Solution
+{
+    int dir[][] = {{0,1},{1,0},{-1,0},{0,-1},{1,1},{-1,-1},{-1,1},{1,-1}};
+    
+    boolean isSafe(int i,int j,int n,int m){
+        return i>=0 && i<n && j>=0 && j<m;
+    }
+    
+    public int  Count(int[][] mat)
+    {
+        int cnt=0,n=mat.length,m=mat[0].length;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(mat[i][j]==1){
+                    int zero=0;
+                    for(int d[]:dir){
+                        int a=i+d[0],b=j+d[1];
+                        if(isSafe(a,b,n,m) && mat[a][b]==0)zero++;
+                    }
+                    if(zero>0 && zero%2==0)cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+}
