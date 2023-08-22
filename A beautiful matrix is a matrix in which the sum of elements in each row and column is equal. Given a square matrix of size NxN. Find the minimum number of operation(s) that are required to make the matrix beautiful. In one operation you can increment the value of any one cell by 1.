@@ -1,0 +1,54 @@
+A beautiful matrix is a matrix in which the sum of elements in each row and column is equal. Given a square matrix
+of size NxN. Find the minimum number of operation(s)
+that are required to make the matrix beautiful. In one operation you can increment the value of any one cell by 1.
+
+
+==================================================================================================================
+
+
+class Solution {
+    public static int findMinOperation(int N, int[][] matrix) {
+        // code here
+          int minOper=0;
+        int maxSum=0;
+        
+        int rowMaxSum=maxRowSum(matrix,N);
+        int columnMaxSum=maxRowSum(transpose(matrix,N),N);
+        if(rowMaxSum > columnMaxSum){
+            maxSum=rowMaxSum;
+        }else{
+            maxSum=columnMaxSum;
+        }
+        
+        for(int x=0;x<N;x++){
+            minOper+=(maxSum-rowSum(matrix[x],N));
+        }
+        return minOper;
+    }
+    
+    public static int maxRowSum(int[][] matrix,int N){
+        int max=0;
+        for(int x=0;x<N;x++){
+            if(rowSum(matrix[x],N) > max){
+                max=rowSum(matrix[x],N);
+            }
+        }
+        return max;
+    }
+    
+    public static int rowSum(int[] row,int N){
+        int sum=0;
+        for(int x=0;x<N;x++){
+            sum+=row[x];
+        }return sum;
+    }
+    
+    public static int[][] transpose(int[][] matrix,int N){
+        int[][] matrix2=new int[N][N];
+        for(int x=0;x<N;x++){
+            for(int y=0;y<N;y++){
+                matrix2[x][y]=matrix[y][x];
+            }
+        }return matrix2;
+    }
+}
