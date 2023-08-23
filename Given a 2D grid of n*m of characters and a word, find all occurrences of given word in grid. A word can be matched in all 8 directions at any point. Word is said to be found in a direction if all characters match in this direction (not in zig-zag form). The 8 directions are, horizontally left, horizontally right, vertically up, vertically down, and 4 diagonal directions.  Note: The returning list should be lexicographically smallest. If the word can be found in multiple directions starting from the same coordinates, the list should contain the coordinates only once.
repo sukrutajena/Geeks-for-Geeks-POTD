@@ -1,0 +1,70 @@
+Given a 2D grid of n*m of characters and a word, find all occurrences of given word in grid. A word can be matched in all 8
+directions at any point. Word is said to be found in a direction if all characters match in this direction (not in zig-zag form). 
+The 8 directions are, horizontally left, horizontally right, vertically up, vertically down, and 4 diagonal directions.
+
+Note: The returning list should be lexicographically smallest. If the word can be found in multiple directions starting from the 
+same coordinates, the list should contain the coordinates only once.
+
+
+
+
+===================================================================================================================================================
+
+
+class Solution
+{
+    public boolean isWord(char[][] grid, String word, int row, int col, int n, int m) {
+        int[][] dirs = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}};
+        boolean flag = true;
+        for(int[] dir: dirs) {
+            int idx = 1;
+            int drow = dir[0];
+            int dcol = dir[1];
+            int nrow = row;
+            int ncol = col;
+            for(int k = idx; k < word.length(); k++) {
+                nrow += drow;
+                ncol += dcol;
+                if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && grid[nrow][ncol] == word.charAt(idx)) {
+                    idx++;
+                    flag = true;
+                }else{
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) return flag;
+        }
+        return flag;
+    }
+    
+    public int[][] searchWord(char[][] grid, String word)
+    {
+        // Code here
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>(); 
+        int n = grid.length;
+        int m = grid[0].length;
+        int idx = 0;
+        for(int i = 0; i < n; i++) {
+            idx = 0;
+            for(int j = 0; j < m; j++) {
+                if(grid[i][j] != word.charAt(idx)) continue;
+                if(isWord(grid, word, i, j, n, m)) { // check word in all direction
+                    ArrayList<Integer> coord = new ArrayList<>();
+                    coord.add(i);
+                    coord.add(j);
+                    res.add(coord);
+                }
+            }
+        }
+        if(res.size() > 0) { // conver ArrayList to Array
+            int[][] ans = new int[res.size()][2];
+            for(int i = 0; i < res.size(); i++) {
+                ans[i][0] = res.get(i).get(0);
+                ans[i][1] = res.get(i).get(1);
+            }
+            return ans;
+        }
+        return new int[0][0];
+    }
+}
