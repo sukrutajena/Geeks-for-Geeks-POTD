@@ -1,0 +1,46 @@
+Given start, end and an array arr of n numbers. At each step, start is multiplied with any number in the array and then mod operation with 100000 is done to get the new start.
+
+Your task is to find the minimum steps in which end can be achieved starting from start. If it is not possible to reach end, then return -1.
+
+
+==========================================================================================================================================================================
+
+
+class Solution {
+    int minimumMultiplications(int[] arr, int start, int end) {
+
+        // Your code here
+        
+       int maxPossibleValue = 100000;
+        boolean[] visited = new boolean[maxPossibleValue];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
+        visited[start] = true;
+        int steps = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                int current = queue.poll();
+
+                if (current == end) {
+                    return steps;
+                }
+
+                for (int num : arr) {
+                    int next = (current * num) % maxPossibleValue;
+
+                    if (!visited[next]) {
+                        visited[next] = true;
+                        queue.offer(next);
+                    }
+                }
+            }
+
+            steps++;
+        }
+
+        return -1;
+    }
+}
