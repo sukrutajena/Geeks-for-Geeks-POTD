@@ -1,0 +1,36 @@
+
+Given an integer N. The task is to return the position of first set bit found from the right side in the binary representation of the number.
+Note: If there is no set bit in the integer N, then return 0 from the function.  
+
+
+
+
+
+====================================================================================================================================================================
+
+
+
+
+
+
+class Solution
+{
+    //Function to find position of first set bit in the given number.
+    public static int getFirstSetBit(int n){
+            
+        // Your code here
+        int num=n;
+        int place=0;
+        String bits=Integer.toBinaryString(num);
+        for(int i=bits.length()-1;i>=0;i--)
+        {
+            place++;
+         if(bits.charAt(i)=='1')
+          {
+            return place;
+          }
+        }
+        
+        return 0;
+    }
+}
