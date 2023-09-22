@@ -1,0 +1,72 @@
+Given a sorted array arr containing n elements with possibly duplicate is to find indexes of first elements, the task is to find the first and last occurrences of 
+an element x in the given array.
+Note: If the number x is not found in the array then return both the indices as -1.
+
+
+
+
+
+================================================================================================================================================================================
+
+
+
+
+
+
+
+class GFG
+{
+   static int Firstoccurrence(int arr[],int n,int x){
+        int s=0;
+        int e=n-1;
+        int mid=s+(e-s)/2;
+        int ans=-1;
+        while(s<=e){
+            if(arr[mid]==x){
+                ans=mid;
+                e=mid-1;  // we need first occurrence so start --> mid-1;
+            }
+            else if(x>arr[mid]){    // Right move 
+                s=mid+1;
+                
+            }else if(x<arr[mid]){   // Left move 
+                e=mid-1;
+            }
+            
+            mid=s+(e-s)/2;
+        }
+        return ans;
+    }
+    
+    static int Lastoccurrence(int arr[],int n,int x){
+        int s=0;
+        int e=n-1;
+        int mid=s+(e-s)/2;
+        int ans=-1;
+        while(s<=e){
+            if(arr[mid]==x){
+                ans=mid;
+                s=mid+1; // we need last occurrence so start --> mid+1;
+            }
+            else if(x>arr[mid]){    // Right move 
+                s=mid+1;
+                
+            }else if(x<arr[mid]){   // Left move 
+                e=mid-1;
+            }
+            
+            mid=s+(e-s)/2;
+        }
+        return ans;
+    }
+    
+    ArrayList<Integer> find(int arr[], int n, int x)
+    {
+       ArrayList<Integer>list=new ArrayList<>();
+       int e1= Firstoccurrence(arr, n, x);
+       int e2=Lastoccurrence(arr,n,x);
+       list.add(e1);
+       list.add(e2);
+       return list;
+    }
+}
