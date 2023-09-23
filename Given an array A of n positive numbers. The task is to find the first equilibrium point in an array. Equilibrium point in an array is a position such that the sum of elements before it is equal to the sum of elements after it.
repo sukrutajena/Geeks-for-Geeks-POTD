@@ -1,0 +1,40 @@
+Given an array A of n positive numbers. The task is to find the first equilibrium point in an array. Equilibrium point in an array
+is a position such that the sum of elements before it is equal to the sum of elements after it.
+
+
+
+
+
+==========================================================================================================================================
+
+
+
+
+
+
+class Solution {
+
+    
+    // a: input array
+    // n: size of array
+    // Function to find equilibrium point in the array.
+    public static int equilibriumPoint(long A[], int n) {
+
+        // Your code here
+         int totalSum = 0;
+        for (int i = 0; i < n; i++) {
+            totalSum += A[i];
+        }
+        
+        int leftSum = 0;
+        for (int i = 0; i < n; i++) {
+            totalSum -= A[i];
+            if (leftSum == totalSum) {
+                return i + 1; // Return 1-based indexing
+            }
+            leftSum += A[i];
+        }
+        
+        return -1;
+    }
+}
