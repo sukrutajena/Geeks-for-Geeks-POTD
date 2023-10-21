@@ -1,0 +1,19 @@
+
+Given a positive integer N., The task is to find the value of    \sum_{i=1}^{i=n} F(i)  where function F(i) for the number i is defined as the sum of all divisors of i.
+
+
+
+
+=====================================================================================================================================================================
+
+
+
+class Solution{
+    static long sumOfDivisors(int n){
+        long sum = 0;
+        for(int i=1;i<=n;i++){
+            sum += (n/i)*i;
+        }
+        return sum;
+    }
+}
