@@ -1,0 +1,41 @@
+
+You are given an array a, of n elements. Find the minimum index based distance between two distinct elements of the array,
+x and y. Return -1, if either x or y does not exist in the array.
+
+
+
+
+
+
+================================================================================================================================
+
+
+
+
+
+
+class Solution {
+    int minDist(int a[], int n, int x, int y) {                 
+
+        int d1 = -1, d2 = -1, res = Integer.MAX_VALUE;
+        for(int i=0; i<n; i++){
+            if(a[i] == x)
+                d1 = i;
+
+
+            if(a[i] == y)
+                d2 = i;
+
+
+            if(d1 != -1 && d2 != -1)
+                res = Math.min(res, Math.abs(d1-d2));
+        }
+
+
+        if(d1 != -1 && d2 != -1)
+            return res;
+
+
+        return -1;
+    }
+}
