@@ -1,0 +1,39 @@
+GfG Weekly + You = Perfect Sunday Evenings!
+Register for free now
+
+banner
+Given two strings a and b. The task is to find if the string 'b' can be obtained by rotating (in any direction) string 'a' by exactly 2 places.
+
+
+
+
+
+
+=================================================================================================================================================
+
+
+
+
+
+
+class Solution
+{
+    //Function to check if a string can be obtained by rotating
+    //another string by exactly 2 places.
+    public static boolean isRotated(String str1, String str2)
+    {
+        // Your code here
+        
+        if(str1.length() == str2.length()){
+            int n = str1.length();
+            String duplex = str1+str1;
+            HashSet<String> set = new HashSet<>();
+            set.add(duplex.substring(2,n+2));
+            set.add(duplex.substring(duplex.length()-n-2,duplex.length()-2));
+            if(set.contains(str2)) return true;
+        }
+        
+        return false;
+    }
+    
+}
