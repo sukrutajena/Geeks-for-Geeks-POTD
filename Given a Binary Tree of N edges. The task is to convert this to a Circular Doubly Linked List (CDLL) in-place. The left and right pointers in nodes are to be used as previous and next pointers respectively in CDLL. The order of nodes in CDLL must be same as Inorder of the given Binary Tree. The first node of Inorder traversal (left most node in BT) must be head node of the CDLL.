@@ -1,0 +1,59 @@
+Given a Binary Tree of N edges. The task is to convert this to a Circular Doubly Linked List (CDLL) in-place.
+The left and right pointers in nodes are to be used as previous and next pointers respectively in CDLL.
+The order of nodes in CDLL must be same as Inorder of the given Binary Tree.
+The first node of Inorder traversal (left most node in BT) must be head node of the CDLL.
+
+
+
+
+===================================================================================================================================================
+
+
+
+
+
+class Solution {
+
+    Node newHead = null;
+    Node prev = null;
+
+    Node bTreeToClist(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        convertToCDLL(root);
+
+        // Map the last node to the head
+        if (newHead != null && prev != null) {
+            prev.right = newHead;
+            newHead.left = prev;
+        }
+
+        return newHead;
+    }
+
+    private void convertToCDLL(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        convertToCDLL(node.left);
+
+        insertNode(node.data);
+
+        convertToCDLL(node.right);
+    }
+
+    private void insertNode(int data) {
+        if (newHead == null) {
+            newHead = new Node(data);
+            prev = newHead;
+        } else {
+            Node curr = new Node(data);
+            prev.right = curr;
+            curr.left = prev;
+            prev = curr;
+        }
+    }
+}
