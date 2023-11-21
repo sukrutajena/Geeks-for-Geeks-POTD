@@ -1,0 +1,46 @@
+Given two binary trees, the task is to find if both of them are identical or not.
+Note: You need to return true or false, the printing is done by the driver code.
+
+
+
+
+==================================================================================================================================================
+
+
+
+
+class Solution
+{
+    //Function to check if two trees are identical.
+    boolean isIdentical(Node root1, Node root2)
+    {
+        // Code Here
+         if (root1 == null && root2 == null) 
+         {
+
+//if both the trees are null
+            return true;
+        } 
+        else if (root1 == null || root2 == null) 
+        {
+
+//If either of the tree is null
+            return false;
+        }
+        else if (root1.data != root2.data)
+        {
+
+//if the data field is not equal
+            return false;
+        } 
+        else 
+        {
+
+//Recursive call to verify left and right sub Trees
+            return isIdentical(root1.left, root2.left) && isIdentical(root1.right, root2.right);
+        }
+        
+    }
+    
+}
+
